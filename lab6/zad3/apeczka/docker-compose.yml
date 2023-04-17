@@ -1,0 +1,25 @@
+version: '3.9'
+services:
+  frontend:
+    build: .
+    networks:
+      - frontend_network
+    ports:
+      - 3000:3000
+  backend:
+    image: node
+    networks:
+      - frontend_network
+      - backend_network
+    ports:
+      - 6000:3333
+  database:
+    image: mongo:4.1.13
+    networks:
+      - backend_network
+
+networks:
+  frontend_network:
+    driver: bridge
+  backend_network:
+    driver: bridge
