@@ -1,0 +1,22 @@
+version: '3.1'
+services:
+  db:
+    image: mongo:4.1.13
+    networks:
+      - net_A
+    volumes:
+      - C:/Users/Admin/Desktop/volume:/data/db
+    ports:
+      - 27019:27017
+  server:
+    image: mongo:4.1.13
+    networks:
+      - net_A
+    depends_on:
+      - db
+    ports:
+      - 3003:3000
+
+networks:
+  net_A:
+    driver: bridge

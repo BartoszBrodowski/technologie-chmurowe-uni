@@ -1,0 +1,21 @@
+version: '3.7'
+services:
+  web:
+    build: .
+    depends_on:
+      - db
+    ports:
+      - 80:80
+    networks:
+      - my_network
+
+  db:
+    image: postgres
+    networks:
+      - my_network
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+
+networks:
+  my_network:
+    driver: bridge
