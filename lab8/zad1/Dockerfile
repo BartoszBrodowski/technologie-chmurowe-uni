@@ -1,14 +1,11 @@
-FROM node:14
+FROM python:3.9
 
 WORKDIR /app
 
-COPY package.json ./
+COPY requirements.txt .
 
-RUN npm install
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
-  CMD curl -f http://localhost:3000/books || exit 1
-
-CMD ["node", "index.js"]
+CMD ["python", "main.py"]
