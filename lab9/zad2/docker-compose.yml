@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  api:
+    build: /api/.
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
+    networks:
+      - net_A
+    platform: linux/arm64/v8
+  db:
+    image: mongo
+    ports:
+      - 27019:27017
+    networks:
+      - net_A
+    platform: linux/amd64
+
+networks:
+  net_A:
+    driver: bridge
